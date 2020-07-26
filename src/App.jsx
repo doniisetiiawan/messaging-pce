@@ -21,6 +21,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Home from './home';
+import Contacts from './contacts';
+import { logout } from './api';
 
 const styles = {
   root: {
@@ -60,7 +62,9 @@ class App extends React.Component {
   };
 
   onLogoutClick = () => {
-    console.log('src/App.jsx');
+    logout().then(() => {
+      window.location.reload();
+    });
   };
 
   render() {
@@ -147,6 +151,13 @@ class App extends React.Component {
               path="/"
               render={(props) => (
                 <Home {...props} {...{ setTitle }} />
+              )}
+            />
+            <Route
+              exact
+              path="/contacts"
+              render={(props) => (
+                <Contacts {...props} {...{ setTitle }} />
               )}
             />
           </Switch>
