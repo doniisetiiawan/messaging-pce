@@ -26,6 +26,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Home from './home';
 import Contacts from './contacts';
 import Login from './login';
+import Messages from './messages';
 import { logout } from './api';
 
 const styles = {
@@ -155,6 +156,13 @@ class App extends React.Component {
               path="/"
               render={(props) => (
                 <Home {...props} {...{ setTitle }} />
+              )}
+            />
+            <Route
+              exact
+              path="/messages"
+              render={(props) => (
+                <Messages {...props} {...{ setTitle }} />
               )}
             />
             <Route
