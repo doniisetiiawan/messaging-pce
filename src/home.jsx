@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,6 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import EmptyMessage from './emptyMessage';
+import { getContacts } from './api';
 
 const styles = (theme) => ({
   root: {
@@ -28,6 +30,38 @@ class Home extends Component {
       contacts: [],
     };
   }
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount = () => {
+    const { setTitle, history } = this.props;
+
+    setTitle('Barely SMS');
+
+    const refresh = () => getContacts().then((resp) => {
+      if (resp.status === 403) {
+        history.push('/login');
+      } else {
+        resp.json().then((contacts) => {
+          this.setState({
+            contacts: contacts.filter(
+              (contact) => contact.online,
+            ),
+          });
+        });
+      }
+    });
+
+    this.refreshInterval = setInterval(refresh, 5000);
+    refresh();
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.refreshInterval);
+  }
+
+  onMessageClick = (id) => () => {
+    this.props.history.push(`/newmessage/${id}`);
+  };
 
   render() {
     const { classes } = this.props;
