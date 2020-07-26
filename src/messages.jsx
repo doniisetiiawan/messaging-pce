@@ -15,9 +15,9 @@ import { getMessages } from './api';
 
 const styles = (theme) => ({
   root: {
-    margin: '10px',
-    width: '100%',
-    maxWidth: 500,
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     backgroundColor: theme.palette.background.paper,
   },
 });

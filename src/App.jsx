@@ -27,6 +27,8 @@ import Home from './home';
 import Contacts from './contacts';
 import Login from './login';
 import Messages from './messages';
+import NewMessage from './newMessage';
+import MessageDetails from './messageDetails';
 import { logout } from './api';
 
 const styles = {
@@ -167,6 +169,16 @@ class App extends React.Component {
             />
             <Route
               exact
+              path="/messages/:id"
+              render={(props) => (
+                <MessageDetails
+                  {...props}
+                  {...{ setTitle }}
+                />
+              )}
+            />
+            <Route
+              exact
               path="/contacts"
               render={(props) => (
                 <Contacts {...props} {...{ setTitle }} />
@@ -177,6 +189,13 @@ class App extends React.Component {
               path="/login"
               render={(props) => (
                 <Login {...props} {...{ setTitle }} />
+              )}
+            />
+            <Route
+              exact
+              path="/newmessage/:id"
+              render={(props) => (
+                <NewMessage {...props} {...{ setTitle }} />
               )}
             />
           </Switch>
