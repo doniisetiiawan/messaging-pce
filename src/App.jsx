@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  BrowserRouter as Router, Link, Route, Switch,
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
 } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -22,6 +25,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Home from './home';
 import Contacts from './contacts';
+import Login from './login';
 import { logout } from './api';
 
 const styles = {
@@ -158,6 +162,13 @@ class App extends React.Component {
               path="/contacts"
               render={(props) => (
                 <Contacts {...props} {...{ setTitle }} />
+              )}
+            />
+            <Route
+              exact
+              path="/login"
+              render={(props) => (
+                <Login {...props} {...{ setTitle }} />
               )}
             />
           </Switch>
